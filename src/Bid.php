@@ -14,12 +14,17 @@ class Bid
      * @var EventExchange
      */
     private $eventExchange;
+    /**
+     * @var Client
+     */
+    private $client;
 
-    public function __construct(EventName $eventName, EventDate $eventDate, EventExchange $eventExchange)
+    public function __construct(Client $client, EventName $eventName, EventDate $eventDate, EventExchange $eventExchange)
     {
         $this->eventName = $eventName;
         $this->eventDate = $eventDate;
         $this->eventExchange = $eventExchange;
+        $this->client = $client;
     }
 
     /**

@@ -9,7 +9,7 @@ class BidTest extends TestCase
 
     protected function setUp()
     {
-        $this->bid = new Bid(new EventName('Football'), new EventDate('2019-05-01'), new EventExchange(1.30));
+        $this->bid = new Bid(new Client(new Country('Poland')), new EventName('Football'), new EventDate('2019-05-01'), new EventExchange(1.30));
     }
 
     public function testShouldReturnEventNameFromCreatedBid()
