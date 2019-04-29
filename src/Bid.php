@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 class Bid
 {
     /**
@@ -49,5 +51,13 @@ class Bid
     public function getEventExchange(): EventExchange
     {
         return $this->eventExchange;
+    }
+
+    /**
+     * @return Client
+     */
+    public function getClient(): Client
+    {
+        return $this->client;
     }
 }

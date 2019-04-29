@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 class AndSpecification implements SpecificationInterface
 {
 
@@ -20,10 +22,10 @@ class AndSpecification implements SpecificationInterface
     public function isSatisfiedBy(Bid $bid): bool
     {
         foreach ($this->specifications as $specification) {
-            if ($specification->isSatisfiedBy($bid)) {
-                return true;
+            if (!$specification->isSatisfiedBy($bid)) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 }
