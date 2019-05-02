@@ -14,7 +14,7 @@ class BidService
         $bid = new Bid($client, $eventName, $eventDate, $eventExchange);
 
         if ($andSpec->isSatisfiedBy($bid)) {
-            // ...
+            // ex. save in db or other thing
             return true;
         }
         return false;
