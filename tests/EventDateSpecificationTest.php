@@ -1,5 +1,6 @@
 <?php
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class EventDateSpecificationTest extends TestCase
@@ -9,20 +10,31 @@ class EventDateSpecificationTest extends TestCase
      */
     private $eventDateSpecification;
 
+    /**
+     * @var Bid | MockObject
+     */
+    private $bid;
+
     protected function setUp()
     {
         $this->eventDateSpecification = new EventDateSpecification();
+        $this->bid = self::createMock(Bid::class);
     }
 
     public function testIsSatisfiedBy()
     {
-        $bid = new Bid(new Client(new Country('Poland')), new EventName('Football'), new EventDate('2019-05-01'), new EventExchange(1.30));
-        self::assertTrue($this->eventDateSpecification->isSatisfiedBy($bid));
+        $now = new \DateTime();
+        $tommorow = $now->modify('+1day')->format('Y-m-d');
+        $eventDateTommorow = new EventDate($tommorow);
+
+        $this->bid->expects(self::once())->method('getEventDate')->willReturn($eventDateTommorow);
+        self::assertTrue($this->eventDateSpecification->isSatisfiedBy($this->bid));
     }
 
     public function testIsNotSatisfiedBy()
     {
-        $bid = new Bid(new Client(new Country('Poland')), new EventName('Football'), new EventDate('2019-01-01'), new EventExchange(1.30));
-        self::assertFalse($this->eventDateSpecification->isSatisfiedBy($bid));
+        $eventDateOld = new EventDate('1970-01-01');
+        $this->bid->expects(self::once())->method('getEventDate')->willReturn($eventDateOld);
+        self::assertFalse($this->eventDateSpecification->isSatisfiedBy($this->bid));
     }
 }
