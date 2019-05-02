@@ -9,7 +9,7 @@ class EventNameTest extends TestCase
         self::assertEquals('Football', new EventName('Football'));
     }
 
-    public function testShouldThrowException()
+    public function testShouldThrowExceptionWhenArgumentIsEmpty()
     {
         self::expectException(InvalidArgumentException::class);
 
