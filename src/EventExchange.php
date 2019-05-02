@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Assert\Assertion;
+
 class EventExchange
 {
     /**
@@ -15,6 +17,7 @@ class EventExchange
      */
     public function __construct(float $value)
     {
+        Assertion::greaterThan($value,1);
         $this->value = $value;
     }
 
