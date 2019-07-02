@@ -9,11 +9,19 @@ class BidServiceTest extends TestCase
         $now = new \DateTime();
         $tommorow = $now->modify('+1day')->format('Y-m-d');
 
+        $client = new Client(new Country('Poland'));
+
+        $specification = new AndSpecification(
+            new EventDateSpecification(),
+            new ClientSpecification($client)
+        );
+
         $actual = BidService::makeBid(
-            new Client(new Country('Poland')),
+            $client,
             new EventName('Football'),
             new EventDate($tommorow),
-            new EventExchange(1.30)
+            new EventExchange(1.30),
+            $specification
         );
 
         self::assertTrue($actual);
@@ -21,11 +29,19 @@ class BidServiceTest extends TestCase
 
     public function testShouldReturnFalseOnMakeBidWhenDateIsIncorrect()
     {
+        $client = new Client(new Country('Poland'));
+
+        $specification = new AndSpecification(
+            new EventDateSpecification(),
+            new ClientSpecification($client)
+        );
+
         $actual = BidService::makeBid(
-            new Client(new Country('Poland')),
+            $client,
             new EventName('Football'),
             new EventDate('2018-05-01'),
-            new EventExchange(1.30)
+            new EventExchange(1.30),
+            $specification
         );
 
         self::assertFalse($actual);
@@ -33,11 +49,20 @@ class BidServiceTest extends TestCase
 
     public function testShouldReturnFalseOnMakeBidWhenCountryIsIncorrect()
     {
+
+        $client = new Client(new Country('USA'));
+
+        $specification = new AndSpecification(
+            new EventDateSpecification(),
+            new ClientSpecification($client)
+        );
+
         $actual = BidService::makeBid(
-            new Client(new Country('USA')),
+            $client,
             new EventName('Football'),
             new EventDate('2018-05-01'),
-            new EventExchange(1.30)
+            new EventExchange(1.30),
+            $specification
         );
 
         self::assertFalse($actual);
