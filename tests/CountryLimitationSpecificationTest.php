@@ -30,7 +30,7 @@ class CountryLimitationSpecificationTest extends TestCase
     public function testIsNotSatisfiedBy()
     {
         $this->bidMock->method('getClient')
-            ->willReturn(new Client(new Country('USA')));
+            ->willReturn(new Client(new Country('United States')));
 
         self::assertFalse($this->clientSpecification->isSatisfiedBy($this->bidMock));
     }

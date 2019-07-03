@@ -44,7 +44,7 @@ class BidServiceTest extends TestCase
     {
         $specification = new AndSpecification(
             new EventDateSpecification(),
-            new CountryLimitationSpecification(new Client(new Country('USA')))
+            new CountryLimitationSpecification(new Client(new Country('United States')))
         );
 
         $actual = BidService::makeBid(
