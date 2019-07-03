@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-class ClientSpecification implements SpecificationInterface
+class CountryLimitationSpecification implements SpecificationInterface
 {
     /**
      * @var Client
