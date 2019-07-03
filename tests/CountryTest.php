@@ -9,10 +9,15 @@ class CountryTest extends TestCase
         self::assertEquals('Poland', new Country('Poland'));
     }
 
-    public function testShouldThrowException()
+    public function testShouldThrowExceptionWhenArgumentIsEmptyString()
     {
         self::expectException(InvalidArgumentException::class);
-
         new Country('');
+    }
+
+    public function testShouldThrowInvalidArgumentExceptionWithBadCountryName()
+    {
+        self::expectException(InvalidArgumentException::class);
+        new Country('SomeName');
     }
 }
